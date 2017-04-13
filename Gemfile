@@ -12,3 +12,5 @@ gem 'tilt'
 gem 'rack_csrf'
 gem 'bcrypt'
 
+gem 'rspec'
+gem 'rspec-roda'
