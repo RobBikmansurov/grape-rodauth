@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 gem 'grape'
 
-gem 'pg'
+gem 'sqlite3'
 
 gem 'jwt'
 

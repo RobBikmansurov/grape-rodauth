@@ -17,14 +17,15 @@ class API < Grape::API
   end
 
   get :hello do
-    { hello: 'world' }
+    { hello: 'world for all!' }
   end
 
   namespace :private do
     before { authenticate! }
 
     get :hello do
-      { hello: 'world' }
+      email = rodauth.db[:accounts].where(id: rodauth.session[:account_id]).get(:email)
+      { hello: 'world for ' + email }
     end
   end
 end
