@@ -27,7 +27,15 @@ class Auth < Roda
   end
 
   route do |r|
+    puts "\nbefore env:\n"
+    puts env
+    puts "\n\n"
     env['rodauth'] = rodauth
+    puts "\nafter env:\n"
+    puts env
+    puts "\n"
+    puts rodauth
+    puts "\n\n"
     r.rodauth
   end
 end

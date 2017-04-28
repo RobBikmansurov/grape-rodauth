@@ -9,6 +9,8 @@ require 'rack/test'
 describe 'API unauthorized users' do
   include Rack::Test::Methods
 
+  let!(:rodauth) { Class.new Auth }
+
   def app
     ::API
   end
