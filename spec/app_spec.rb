@@ -2,7 +2,7 @@
 
 require 'grape'
 require './auth'
-require './app'
+require './api'
 require 'rspec'
 require 'rack/test'
 
@@ -11,9 +11,11 @@ describe 'API unauthorized users' do
 
   let!(:rodauth) { Class.new Auth }
 
-  def app
-    ::API
-  end
+  let(:app) {
+    Rack::Builder.new do
+      eval File.read(('./config.ru'))
+    end
+  }
 
   context 'GET /api/hello' do
     it 'returns json "world for all!"' do
@@ -26,7 +28,14 @@ describe 'API unauthorized users' do
     it 'returns "401 Unauthorized"' do
       get '/api/private/hello'
       expect(last_response.status).to eq(401)
-      expect(last_response.body).to eq('401 Unauthorized')
+      expect(JSON.parse(last_response.body)).to eq({"error" => "401 Unauthorized"})
+    end
+  end
+  context 'GET /' do
+    it 'returns "404 Not found"' do
+      get '/'
+      expect(last_response.status).to eq(404)
+      expect(last_response.body).to eq('404 Not Found')
     end
   end
 end

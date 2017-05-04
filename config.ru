@@ -1,6 +1,6 @@
 require 'grape'
 require 'roda'
-require './app'
+require './api'
 require './auth'
 
 use Rack::Session::Cookie, secret: '1'	#ENV['SECRET']
